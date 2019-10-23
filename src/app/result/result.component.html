@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="alinhar">
+        <div class="Github-Search">
+            <b>Github</b>
+            <span class="text-style-1"> Search</span>
+        </div>
+    
+        <div class="input">
+            <form (submit)="searchSubmit()">
+                <div class="alinhar">
+                    <input type="text" class="Search-Input search-text" name="userLogin" [(ngModel)]="userLogin">
+                    <button type="submit" class="search-button">
+                        <img src="./assets/img/search-icon.svg" class="Search-Icon">
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div *ngIf="!error">
+        <div class="left-side">
+            <img class="user-avatar" src="{{user.avatar_url}}" alt="" srcset="">
+
+            <h1 class="user-name" *ngIf="user.name">
+                {{user.name}}
+            </h1>
+
+            <h2 class="user-login" *ngIf="user.login">
+                {{user.login}}
+            </h2>
+            <div class="details">
+                <div class="detail" *ngIf="user.company">
+                    <img src="./assets/img/organization icon.svg" class="details-icon">
+                    <span class="details-name">{{user.company}}</span>
+                </div>
+                <div class="detail" *ngIf="user.location">
+                    <img src="./assets/img/location icon.svg" class="details-icon">
+                    <span class="details-name">{{user.location}}</span>
+                </div>
+
+                <div class="detail">
+                    <img src="./assets/img/star icon.svg" class="details-icon">
+                    <span class="details-name">{{totalStars}}</span>
+                </div>
+
+                <div class="detail">
+                    <img src="./assets/img/repositorie icon.svg" class="details-icon">
+                    <span class="details-name">{{user.public_repos}}</span>
+                </div>
+
+                <div class="detail">
+                    <img src="./assets/img/followers icon.svg" class="details-icon">
+                    <span class="details-name">{{user.followers}}</span>
+                    <span class="details-name">{{user.following}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="repo" *ngFor="let repo of repos">
+                <div>
+                    <h1 class="repo-name" *ngIf="repo?.name">
+                        {{repo?.name}}
+                    </h1>
+                    <h2 class="repo-description" *ngIf="repo?.description">
+                        {{repo?.description}}
+                    </h2>
+
+                    <div class="star" *ngIf="repo?.stargazers_count">
+                        <img src="./assets/img/star icon.svg" class="star-icon">
+                        <span class="star-count">{{repo?.stargazers_count}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="div-error" *ngIf="error">
+        <span class="Not-found-message">User not fount :(</span>
+    </div>
+</div>
